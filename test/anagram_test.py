@@ -1,6 +1,5 @@
 import unittest
 from anagram import anagram_class as ac
-from anagram.anagram_class import Anagram
 
 class AnagramClassTest(unittest.TestCase):
     def setUp(self):
@@ -10,7 +9,7 @@ class AnagramClassTest(unittest.TestCase):
         self.word_symbol = 'd$llar'
         self.capital = 'Words'
         self.lower_case = 'words'
-        self.anagram = Anagram(self.not_anagram)
+        self.anagram = ac.Anagram(self.not_anagram)
 
     def tearDown(self):
         del self.anagram
@@ -18,15 +17,17 @@ class AnagramClassTest(unittest.TestCase):
     def test_constructor_symbol(self):
         """Test for symbol in word"""
         with self.assertRaises(ac.InvalidWordException):
-            self.anagram = Anagram(self.word_symbol)
+            self.anagram = ac.Anagram(self.word_symbol)
 
     def test_constructor_number(self):
         """Test for number in word"""
         with self.assertRaises(ac.InvalidWordException):
-            self.anagram = Anagram(self.word_number)
+            self.anagram = ac.Anagram(self.word_number)
 
     def test_constructor_capital(self):
-        pass
+        expected = 'dorsw'
+        expected_anagram = ac.Anagram(self.capital)
+        self.assertEqual(expected_anagram.sort_anagram(), expected)
 
 if __name__ == '__main__':
     unittest.main()
