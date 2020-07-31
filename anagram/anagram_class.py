@@ -1,6 +1,6 @@
 """
-Author: Rachel Li
 Program: anagram_class.py
+Author: Rachel Li
 Last date modified: 29/07/2020
 
 The purpose of this program is to write class with exception for anagram
@@ -9,9 +9,11 @@ class InvalidWordException(Exception):
     ''' invalid word exception '''
     pass
 
+
 class Anagram():
     """Anagram class"""
     def __init__(self, word):
+        """Anagram Constructor"""
         word_characters = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ")
         if not (word_characters.issuperset(word)):
             raise InvalidWordException
@@ -32,5 +34,3 @@ class Anagram():
     def __str__(self):
         return f'Word: {self.word}, Anagram: {self.sorted_anagram}'
 
-    def __repr__(self):
-        return "Anagram: " + self.__str__()
