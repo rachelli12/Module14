@@ -1,7 +1,7 @@
 """
 Program: anagram_database.py
 Author: Rachel LI
-Last date modified: 30/07/2020
+Last date modified: 31/07/2020
 
 The purpose of this program is to use query to read database
 """
@@ -54,3 +54,14 @@ def create_anagram(conn, anagram):
     c = conn.cursor() #cursor object
     c.execute(sql, anagram)
     return c.lastrowid #return the row id of cursor object
+
+def select_all_anagrams(conn):
+    """ Query all rows of anagram table
+    :param conn: connection object
+    :return: rows
+    """
+    c = conn.cursor()
+    c.execute("SELECT * FROM anagram;")
+    rows = c.fetchall()
+    return rows
+
