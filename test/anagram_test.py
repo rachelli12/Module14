@@ -16,11 +16,14 @@ class AnagramClassTest(unittest.TestCase):
         del self.anagram
 
     def test_constructor_symbol(self):
-        with self.assertRaises(ac.InvalidWordException):
+        """Test for symbol in word"""
+        with self.assertRaises(ac.InvalidWordSymbolException):
             self.anagram = Anagram(self.word_symbol)
 
     def test_constructor_number(self):
-        pass
+        """Test for number in word"""
+        with self.assertRaises(ac.InvalidWordNumberException):
+            self.anagram = Anagram(self.word_number)
 
     def test_constructor_capital(self):
         pass
