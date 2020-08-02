@@ -14,7 +14,6 @@ class AnagramClassTest(unittest.TestCase):
         self.is_anagram = 'racecar'
         self.word_number = 'w0rd'
         self.word_symbol = 'd$llar'
-        self.capital = 'Words'
         self.lower_case = 'words'
         self.anagram = Anagram_Functions(self.not_anagram)
 
@@ -31,10 +30,6 @@ class AnagramClassTest(unittest.TestCase):
         with self.assertRaises(InvalidWordException):
             self.anagram = Anagram_Functions(self.word_number)
 
-    def test_constructor_capital(self):
-        expected = 'dorsw'
-        expected_anagram = (self.capital)
-        self.assertEqual(expected_anagram.main(), expected)
 
 if __name__ == '__main__':
     unittest.main()
