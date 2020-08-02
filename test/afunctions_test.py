@@ -6,8 +6,7 @@ Last date modified: 02/08/2020
 This program tests constructors of anagram_functions
 """
 import unittest
-from anagram import anagram_functions as af
-from anagram.anagram_functions import Anagram_Functions
+from anagram.anagram_functions import *
 
 class AnagramClassTest(unittest.TestCase):
     def setUp(self):
@@ -24,18 +23,18 @@ class AnagramClassTest(unittest.TestCase):
 
     def test_constructor_symbol(self):
         """Test for symbol in word"""
-        with self.assertRaises(af.InvalidWordException):
+        with self.assertRaises(InvalidWordException):
             self.anagram = Anagram_Functions(self.word_symbol)
 
     def test_constructor_number(self):
         """Test for number in word"""
-        with self.assertRaises(af.InvalidWordException):
+        with self.assertRaises(InvalidWordException):
             self.anagram = Anagram_Functions(self.word_number)
 
     def test_constructor_capital(self):
         expected = 'dorsw'
-        expected_anagram = Anagram_Functions(self.capital)
-        self.assertEqual(expected_anagram.sort_anagram(), expected)
+        expected_anagram = (self.capital)
+        self.assertEqual(expected_anagram.main(), expected)
 
 if __name__ == '__main__':
     unittest.main()
