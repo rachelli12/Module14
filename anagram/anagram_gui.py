@@ -22,14 +22,14 @@ class entry_GUI(tk.Tk):
 
         self.start_label = tk.Label(self, text='Enter your word here', width=25).grid(row=1, column=0)
         self.start_enter = tk.Entry(self).grid(row=1, column=1)
-        self.enter_button = tk.Button(self, text='Enter', command=main(), width= 25).grid(row=1, column=2)
+        self.enter_button = tk.Button(self, text='Enter', command=nagamar(), width= 25).grid(row=1, column=2)
 
-        self.display_result_label = tk.Label(self, text='Results', command=main()).grid(row=2, column=0)
+        self.display_result_label = tk.Label(self, text='Results', command=nagamar()).grid(row=2, column=0)
 
         self.exit_button = tk.Button(self, text='Exit', width=25, command=self.destroy).grid(row=3)
 
     def create_database(self):
-        main()
+        nagamar()
         create_tables(self.DATABASE)
 
     def add_anagram(self):
