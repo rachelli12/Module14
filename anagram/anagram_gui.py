@@ -1,7 +1,7 @@
 """
 Program: anagram_gui.py
 Author: Rachel Li
-Last date modified: 31/07/2020
+Last date modified: 01/08/2020
 
 The purpose of this program is to create GUI with Database
 and produce GUI of anagram that displays output of anagram.
@@ -11,14 +11,14 @@ from anagram.anagram_class import *
 from anagram.anagram_functions import *
 from anagram.anagram_database import *
 import tkinter as tk
-from tkinter import messagebox
+
 
 class entry_GUI(tk.Tk):
     DATABASE = 'anagram_database.db'
 
     def __init__(self):
         tk.Tk.__init__(self)
-        self.title("Anagram Generator")
+        self.title("Angamar")
 
         self.start_label = tk.Label(self, text='Enter your word here', width=25).grid(row=1, column=0)
         self.start_enter = tk.Entry(self).grid(row=1, column=1)

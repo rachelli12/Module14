@@ -1,7 +1,7 @@
 """
 Program: anagram_functions.py
 Author: Rachel Li
-Last date modified: 01/08/2020
+Last date modified: 02/08/2020
 
 The purpose of this program is to write anagram functions for GUI
 """
@@ -24,48 +24,72 @@ class Anagram_Functions(object):
         self.dict = {}
 
     def add_letters(self, letters):
+        """
+        :param letters: represents letters in word
+        :return: returns letters in dictionary with index
+        """
         a = self
         for index, letter in enumerate(letters):
+            #assign index to each iterable item
             if letter not in a.dict:
                 a.dict[letter] = Anagram_Functions(letter, index==len(letters)-1, index+1)
             a = a.dict[letter]
 
     def anagram(self, letters):
-        tiles = {}
+        """
+        :param letters: represents letters in word in set
+        :return: return to _anagram function
+        """
+        alphabet = {}
         for letter in letters:
-            tiles[letter] = tiles.get(letter, 0) + 1
+            alphabet[letter] = alphabet.get(letter, 0) + 1
         min_length = len(letters)
-        return self._anagram(tiles, [], self, min_length)
+        return self._anagram(alphabet, [], self, min_length)
 
-    def _anagram(self, tiles, path, root, min_length):
+    def _anagram(self, alphabet, path, root, min_length):
+        """
+        :param alphabet: represents the set collection
+        :param path: represents path
+        :param root: represents root
+        :param min_length: represents minimum length of word
+        :return: return anagram
+        """
         if self.final and self.depth >= MIN_WORD_LENGTH:
             word = ''.join(path)
             length = len(word.replace(' ', ''))
             if length >= min_length:
                 yield word
             path.append(' ')
-            for word in root._anagram(tiles, path, root, min_length):
+            for word in root._anagram(alphabet, path, root, min_length):
                 yield word
             path.pop()
-        for letter, node in self.dict.items():
-            count = tiles.get(letter, 0)
+        for letter, a in self.dict.items():
+            count = alphabet.get(letter, 0)
             if count == 0:
                 continue
-            tiles[letter] = count - 1
+            alphabet[letter] = count - 1
             path.append(letter)
-            for word in node._anagram(tiles, path, root, min_length):
+            for word in a._anagram(alphabet, path, root, min_length):
                 yield word
             path.pop()
-            tiles[letter] = count
+            alphabet[letter] = count
 
 def load_dictionary(path):
+    """
+    :param path: represents wordlist.txt file
+    :return: return anagrams of word into dictionary
+    :rtype:
+    """
     result = Anagram_Functions()
     for line in open(path, 'r'):
         word = line.strip().lower()
         result.add_letters(word)
     return result
 
-def main():
+def nagamar():
+    """
+    :return: returns anagram result
+    """
     try:
         with open('wordlist.txt', 'r') as f:
             for dictionary in f.readline():
@@ -75,9 +99,6 @@ def main():
                     letters = input('Enter letters: ')
                     letters = letters.lower()
                     letters = letters.replace(' ', '')
-                    word_characters = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ")
-                    if not (word_characters.issuperset(letters)):
-                        raise InvalidWordException
                 count = 0
                 for word in f.anagram(letters):
                     print(word)
@@ -96,7 +117,9 @@ if __name__ == '__main__':
         letters = input('Enter letters: ')
         letters = letters.lower()
         letters = letters.replace(' ', '')
-        if not letters:
+        word_characters = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ")
+        if not (word_characters.issuperset(letters)):
+            raise InvalidWordException
             break
         count = 0
         for word in words.anagram(letters):
