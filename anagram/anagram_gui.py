@@ -22,31 +22,27 @@ class entry_GUI(tk.Tk):
 
         self.start_label = tk.Label(self, text='Enter your word here', width=25).grid(row=1, column=0)
         self.start_enter = tk.Entry(self).grid(row=1, column=1)
-        self.enter_button = tk.Button(self, text='Enter', command=self.create_database, width= 25).grid(row=2)
+        self.enter_button = tk.Button(self, text='Enter', command=main(), width= 25).grid(row=1, column=2)
 
-        self.display_result_label = tk.Label(self, text='Results').grid(row=3, column=0)
-        self.display_result_message = messagebox.showinfo(command=result)
+        self.display_result_label = tk.Label(self, text='Results', command=main()).grid(row=2, column=0)
 
-        self.exit_button = tk.Button(self, text='Exit', width=25, command=self.destroy).grid(row=4)
+        self.exit_button = tk.Button(self, text='Exit', width=25, command=self.destroy).grid(row=3)
 
     def create_database(self):
+        main()
         create_tables(self.DATABASE)
 
     def add_anagram(self):
         conn = create_connection(self.DATABASE)
         with conn:
-            anagram = (self.start_enter.get())
-            create_anagram(conn, anagram)
+            an = (self.start_enter.get())
+            create_anagram(conn, an)
 
     def view_anagram(self):
         conn = create_connection(self.DATABASE)
-        anagrams = select_all_anagrams(conn)
-        for anagram in anagrams:
-            print(anagram)
-
-    def result(self):
-
-
+        ans = select_all_anagrams(conn)
+        for a in ans:
+            print(ans)
 
 if __name__ == '__main__':
     entry_GUI().mainloop()
