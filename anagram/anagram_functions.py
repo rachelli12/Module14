@@ -1,3 +1,10 @@
+"""
+Program: anagram_functions.py
+Author: Rachel Li
+Last date modified: 01/08/2020
+
+The purpose of this program is to write anagram functions for GUI
+"""
 MIN_WORD_LENGTH = 2
 #minimum length of word in output
 
@@ -68,6 +75,9 @@ def main():
                     letters = input('Enter letters: ')
                     letters = letters.lower()
                     letters = letters.replace(' ', '')
+                    word_characters = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ")
+                    if not (word_characters.issuperset(letters)):
+                        raise InvalidWordException
                 count = 0
                 for word in f.anagram(letters):
                     print(word)
